@@ -1,0 +1,51 @@
+<html>
+<head>
+				<title>
+								Login sample page
+				</title>				
+</head>
+<body style="
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    justify-items: center;
+    align-items: center;
+" onload="getFeatureFlag()">
+				<h1>
+								Sample Login Page
+				</h1>
+				<form style="display: inline-grid;height:12rem;margin-top:-12rem;" name="login">
+								Username<input style="margin: 0.1rem 0 1rem 0;" type="text" name="user" />
+								Password<input style="margin-top: 0.1rem;" type="password" name="pass" />
+								<input style="margin: 1.5rem 0 0.5rem 0;" type="button" onclick="check(this.form)" value="Login" />
+								<input type="reset" value="Cancel" />
+																																
+				</form>
+				<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js">
+				</script>
+				<script language="javascript">
+								var isMyFirstFeatureEnabled;
+								var sdkKey = '1K3ZCCa1S0GKW6RN4S5wyA/o33xY-5E_U-aEzyeTlme_g';
+								var client = configcat.createClient(sdkKey);
+
+								var getFeatureFlag = () => {
+												client.getValue('isMyFirstFeatureEnabled', false, (value) => {
+																isMyFirstFeatureEnabled = value;
+												});
+								};
+
+								function check(form){												
+												if (form.user.value === "blaUser" && form.pass.value === "blaPass") {
+																console.log('isMyFirstFeatureEnabled: ',isMyFirstFeatureEnabled);
+																if (isMyFirstFeatureEnabled) {
+																				window.open('https://www.duckduckgo.com');
+																} else {
+																				window.open('https://www.google.com');
+																};																
+												} else {
+																alert("You are not the user I am looking for")
+												};
+								};
+				</script>
+</body>
+</html>
